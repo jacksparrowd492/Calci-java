@@ -2,29 +2,22 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'   // Name configured in Jenkins Global Tool Config
-        jdk 'JDK17'     // Adjust based on your setup
+        maven 'Maven'
+        jdk 'JDK17'
     }
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Cloning GitHub Repository...'
-                git 'https://github.com/jacksparrowd492/Calci-java.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                echo 'Building Project...'
+                echo 'Building project...'
                 sh 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running Unit Tests...'
+                echo 'Running tests...'
                 sh 'mvn test'
             }
         }
