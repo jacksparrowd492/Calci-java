@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'   // Name configured in Jenkins Global Tool Config
+        jdk 'JDK17'     // Adjust based on your setup
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Cloning GitHub Repository...'
+                git 'https://github.com/jacksparrowd492/Calci-java.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building Project...'
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running Unit Tests...'
+                sh 'mvn test'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
