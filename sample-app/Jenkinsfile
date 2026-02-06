@@ -11,14 +11,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building project...'
-                sh 'mvn clean compile'
+                dir('sample-app') {
+                    sh 'mvn clean compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'
+                echo 'Running unit tests...'
+                dir('sample-app') {
+                    sh 'mvn test'
+                }
             }
         }
     }
